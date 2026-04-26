@@ -2,8 +2,7 @@ import uuid
 from sqlalchemy import Column, String
 from sqlalchemy.dialects.postgresql import UUID
 from app.db.database import Base
-from passlib.context import CryptContext
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+from app.utils import verify_password as _verify_password
 
 class User(Base):
     __tablename__ = "users"
@@ -15,6 +14,6 @@ class User(Base):
     password = Column(String)
 
     def verify_password(self, password: str) -> bool:
-        return pwd_context.verify(password, self.password)
+        return _verify_password(password, self.password)
 
 

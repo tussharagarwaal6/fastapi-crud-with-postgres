@@ -1,6 +1,7 @@
 [project]
 name = "fastapi-crud-with-postgres"
 version = "0.1.0"
+package-mode = false
 description = ""
 authors = [
     {name = "Tusshar Agarwaal", email = "tussharagarwaal6@gmail.com"}

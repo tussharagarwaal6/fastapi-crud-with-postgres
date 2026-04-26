@@ -9,8 +9,10 @@ class UserBase(BaseModel):
 class UserCreate(UserBase):
     pass
 
-class UserResponse(UserBase):
+class UserResponse(BaseModel):
     id: UUID
+    name: str
+    email: str
     
     class Config:
         from_attributes = True
