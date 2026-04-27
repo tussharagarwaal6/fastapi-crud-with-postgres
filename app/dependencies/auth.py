@@ -1,9 +1,9 @@
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from jose import JWTError, jwt
-from config import SECRET_KEY, ALGORITHM
-from models.user import User
-from database import get_db
+from app.config import SECRET_KEY, ALGORITHM
+from app.models.user import User
+from app.db.database import get_db
 
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="users/login")
@@ -25,3 +25,6 @@ def get_current_user(token: str = Depends(oauth2_scheme), db = Depends(get_db)):
         return user
     except JWTError:
         raise credentials_exception
+
+def get_current_user_id(user: User = Depends(get_current_user)):
+    return user.id
